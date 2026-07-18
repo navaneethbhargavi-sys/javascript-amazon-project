@@ -105,14 +105,21 @@ document.querySelectorAll('.js-delete-link')
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
+
+      updateCartQuantity();
     });
   });
 
-let cartQuantity = 0;
+updateCartQuantity();
 
-cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-});
+function updateCartQuantity() {
+  let cartQuantity = 0;
 
-document.querySelector('.js-return-to-home-link')
-  .innerHTML = `${cartQuantity} items`;
+  cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector('.js-return-to-home-link')
+    .innerHTML = `${cartQuantity} items`;
+}
+
