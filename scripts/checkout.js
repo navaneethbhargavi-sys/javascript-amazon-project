@@ -124,7 +124,8 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
 
     document.querySelector('.js-quantity-label').innerHTML = inputValue;
 
-    updateQuantity(productId, inputValue);
+    updateQuantity(productId, inputValue)
+    updateCartQuantity();
   });
 });
 
