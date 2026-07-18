@@ -1,21 +1,21 @@
-import {cart, removeFromCart} from '../data/cart.js';
-import {products} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
+import { cart, removeFromCart } from '../data/cart.js';
+import { products } from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
 let cartSummaryHTML = '';
 
 cart.forEach((cartItem) => {
-    const productId = cartItem.productId;
+  const productId = cartItem.productId;
 
-    let matchingProduct;
+  let matchingProduct;
 
-    products.forEach((product) => {
-        if (product.id === productId) {
-            matchingProduct = product;
-        }
-    });
-    
-    cartSummaryHTML += `
+  products.forEach((product) => {
+    if (product.id === productId) {
+      matchingProduct = product;
+    }
+  });
+
+  cartSummaryHTML += `
         <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
@@ -92,18 +92,27 @@ cart.forEach((cartItem) => {
         </div>
         </div>
     `;
-}); 
+});
 
 document.querySelector('.js-order-summary')
-    .innerHTML = cartSummaryHTML;
+  .innerHTML = cartSummaryHTML;
 
 document.querySelectorAll('.js-delete-link')
-    .forEach((link) => {
-        link.addEventListener('click', () => {
-            const productId = link.dataset.productId;
-            removeFromCart(productId);
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+      removeFromCart(productId);
 
-            const container = document.querySelector(`.js-cart-item-container-${productId}`);
-            container.remove();
-        });
+      const container = document.querySelector(`.js-cart-item-container-${productId}`);
+      container.remove();
+    });
+  });
+
+let cartQuantity = 0;
+
+cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
 });
+
+document.querySelector('.js-return-to-home-link')
+  .innerHTML = `${cartQuantity} items`;
