@@ -40,7 +40,7 @@ cart.forEach((cartItem) => {
                 Update
                 </span>
                 <input class="quantity-input">
-                <span class="save-quantity-link link-primary">Save</span>
+                <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">Save</span>
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                 Delete
                 </span>
@@ -110,13 +110,27 @@ document.querySelectorAll('.js-delete-link')
 
       updateCartQuantity();
     });
-  });
+});
 
-  document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
-    updateLink.addEventListener('click', () => {
-      console.log(updateLink.dataset.productId);
-    });
+document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
+  saveLink.addEventListener('click', () => {
+    const productId = saveLink.dataset.productId;
+
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    
+    container.classList.remove('is-editing-quantity');
   });
+});
+
+document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
+  updateLink.addEventListener('click', () => {
+    const productId = updateLink.dataset.productId;
+
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    
+    container.classList.add('is-editing-quantity');
+  });
+});
 
 updateCartQuantity();
 
