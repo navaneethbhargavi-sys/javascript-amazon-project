@@ -109,7 +109,6 @@ export function renderOrderSummary() {
 
         renderCheckoutHeader();
         renderOrderSummary();
-        updateCartQuantity();
         renderPaymentSummary();
       });
     });
@@ -164,5 +163,8 @@ function saveUpdatedQuantity(saveLink) {
   document.querySelector(`.js-quantity-label-${productId}`).innerHTML = inputValue;
 
   updateQuantity(productId, inputValue)
-  updateCartQuantity();
+
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
 }
