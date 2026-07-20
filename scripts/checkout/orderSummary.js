@@ -58,6 +58,7 @@ export function renderOrderSummary() {
               </span>
             </div>
           </div>
+      </div>
 
         <div class="delivery-options">
           <div class="delivery-options-title">
@@ -65,7 +66,6 @@ export function renderOrderSummary() {
           </div>
           ${deliveryOptionsHTML(matchingProduct, cartItem)}
         </div>
-      </div>
       </div>
     `;
   });
@@ -121,9 +121,7 @@ export function renderOrderSummary() {
         const productId = link.dataset.productId;
         removeFromCart(productId);
 
-        const container = document.querySelector(`.js-cart-item-container-${productId}`);
-        container.remove();
-
+        renderOrderSummary();
         updateCartQuantity();
         renderPaymentSummary();
       });
@@ -137,30 +135,30 @@ export function renderOrderSummary() {
         renderOrderSummary();
         renderPaymentSummary();
       })
-  })
-}
-
-document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
-  saveLink.addEventListener('click', () => {
-    saveUpdatedQuantity(saveLink);
-  });;
-});
-
-document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
-  const productId = updateLink.dataset.productId;
-
-  const container = document.querySelector(`.js-cart-item-container-${productId}`);
-
-  updateLink.addEventListener('click', () => {
-    container.classList.add('is-editing-quantity');
   });
 
-  updateLink.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+  document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
+    saveLink.addEventListener('click', () => {
+      saveUpdatedQuantity(saveLink);
+    });
+  });
+
+  document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
+    const productId = updateLink.dataset.productId;
+
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
+    updateLink.addEventListener('click', () => {
       container.classList.add('is-editing-quantity');
-    }
+    });
+
+    updateLink.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        container.classList.add('is-editing-quantity');
+      }
+    });
   });
-});
+}
 
 updateCartQuantity();
 
