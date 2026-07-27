@@ -16,4 +16,8 @@ describe('test suite: formatCurrency', () => {
   it('rounds down if decimal is less than 0.5', () => {
     expect(formatCurrency(2000.4)).toEqual('20.00');
   });
+
+  it('test for negative currency', () => {
+    expect(formatCurrency(-1)).toEqual('-0.01');
+  });
 });
