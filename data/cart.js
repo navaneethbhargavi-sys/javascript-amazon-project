@@ -93,6 +93,10 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
   if (!matchingItem) {
     return;
+  };
+
+  if (!['1', '2', '3'].includes(deliveryOptionId)) {
+    return;
   }
 
 	matchingItem.deliveryOptionId = deliveryOptionId;

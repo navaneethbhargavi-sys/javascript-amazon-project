@@ -131,4 +131,12 @@ describe('test suite: update delivery option', () => {
     expect(cart[0].quantity).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(0);
   });
+
+  it('update delivery option of a product with invalid delivery option id', () => {
+    updateDeliveryOption(productId1, 'does-not-exist');
+    expect(cart.length).toEqual(1);
+    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+    expect(cart[0].quantity).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+  })
 })
