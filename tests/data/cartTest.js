@@ -123,4 +123,12 @@ describe('test suite: update delivery option', () => {
       deliveryOptionId: '3'
     }]));
   });
+
+  it('update delivery option of a product not in cart', () => {
+    updateDeliveryOption('does-not-exist', '3');
+    expect(cart.length).toEqual(1);
+    expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+    expect(cart[0].quantity).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+  });
 })
