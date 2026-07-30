@@ -12,7 +12,7 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
-class Product {
+export class Product {
   id;
   image;
   name;
@@ -40,7 +40,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+export class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
@@ -56,12 +56,15 @@ class Clothing extends Product {
   }
 }
 
-class Appliance extends Product {
+export class Appliance extends Product {
   instructionsLink;
   warrantyLink;
 
   constructor(productDetails) {
     super(productDetails);
+
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink;
   }
 
   extraInfoHTML() {
@@ -71,37 +74,6 @@ class Appliance extends Product {
     `;
   }
 }
-
-/*
-const date = new Date();
-console.log(date);
-console.log(date.toLocaleTimeString());
-*/
-
-/*
-console.log(this);
-
-const object2 = {
-  a: 2,
-  b: this.a
-};
-*/
-
-/*
-function logThis() {
-  console.log(this);
-}
-logThis();
-logThis.call('hello');
-
-this
-const object3 = {
-  method: () => {
-    console.log(this);
-  }
-};
-object3.method();
-*/
 
 export const products = [
   {
