@@ -38,39 +38,40 @@ class Car {
   }
 }
 
-// const car1 = new Car({
-//   brand: 'Toyota',
-//   model: 'Corolla'
-// });
-// // const car2 = new Car({
-// //   brand: 'Tesla',
-// //   model: 'Model 3'
-// // });
+class RaceCar extends Car {
+  acceleration;
 
-// // console.log(car1);
-// // console.log(car2);
+  constructor(carDetails) {
+    super(carDetails);
 
-// // car1.displayInfo();
-// // car2.displayInfo();
+    this.acceleration = carDetails.acceleration;
+  }
 
-// car1.go();
-// car1.displayInfo();
-// car1.go();
-// car1.displayInfo();
-// car1.brake();
-// car1.displayInfo();
-// car1.brake();
-// car1.displayInfo();
-// car1.brake();
-// car1.displayInfo();
-// car1.go();
-// car1.displayInfo();
-// car1.go();
-// car1.go();
-// car1.openTrunk();
-// car1.displayInfo();
-// car1.brake();
-// car1.brake();
-// car1.brake();
-// car1.openTrunk();
-// car1.displayInfo();
+  go() {
+    this.speed += this.acceleration;
+
+    if (this.speed > 300) {
+      this.speed = 300;
+    }
+  }
+
+  // Race cars do not have a trunk
+  openTrunk() {
+    console.log('Race cars do not have a trunk');
+  }
+
+  closeTrunk() {
+    console.log('Race cars do not have a trunk');
+  }
+}
+
+const racecar1 = new RaceCar({
+  brand: 'McLaren',
+  model: 'F1',
+  acceleration: 20
+});
+
+racecar1.openTrunk();
+racecar1.displayInfo();
+racecar1.go();
+racecar1.displayInfo();
