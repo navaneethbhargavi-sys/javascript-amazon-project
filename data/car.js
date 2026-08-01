@@ -71,7 +71,7 @@ const racecar1 = new RaceCar({
   acceleration: 20
 });
 
-racecar1.openTrunk();
-racecar1.displayInfo();
-racecar1.go();
-racecar1.displayInfo();
+// racecar1.openTrunk();
+// racecar1.displayInfo();
+// racecar1.go();
+// racecar1.displayInfo();
