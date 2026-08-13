@@ -2,6 +2,7 @@ import {orders} from '../data/orders.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import formatCurrency from './utils/money.js';
 import { getProduct, loadProductsFetch } from '../data/products.js';
+import {cart} from '../data/cart-class.js';
 
 async function loadPage() {
   await loadProductsFetch();
@@ -62,7 +63,7 @@ async function loadPage() {
             <div class="product-quantity">
               Quantity: ${productDetails.quantity}
             </div>
-            <button class="buy-again-button button-primary">
+            <button class="buy-again-button button-primary js-buy-again-button" data-product-id=${product.id}>
               <img class="buy-again-icon" src="images/icons/buy-again.png">
               <span class="buy-again-message">Buy it again</span>
             </button>
@@ -70,7 +71,7 @@ async function loadPage() {
 
           <div class="product-actions">
             <a href="tracking.html?orderId=${order.id}&productId=${product.id}">
-              <button class="track-package-button button-secondary">
+              <button class="track-package-button button-secondary js-track-package-button" data-order-id=${order.id} data-productId=${product.id} >
                 Track package
               </button>
             </a>
@@ -83,6 +84,23 @@ async function loadPage() {
   })
 
   document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+
+  document.querySelectorAll('.js-buy-again-button').forEach((buyAgainButton) => {
+    const productId = buyAgainButton.dataset.productId;
+
+    buyAgainButton.addEventListener('click', () => {
+      cart.addToCart(productId);
+    });
+  });
+
+  document.querySelectorAll('.js-track-package-button').forEach((trackButton) => {
+    const orderId = trackButton.dataset.orderId;
+    const productId = trackButton.dataset.productId;
+
+    trackButton.addEventListener('click', () => {
+      window.location.href = `tracking.html?orderId=${order.id}&productId=${product.id}`;
+    });
+  });
 }
 
 loadPage();
