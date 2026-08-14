@@ -7,7 +7,18 @@ loadProducts(renderProductsGrid);
 function renderProductsGrid() {
   let productsHTML = "";
 
-  products.forEach((product) => {
+  const url = new URL(window.location.href);
+  const search = url.searchParams.get('search');
+
+  let filteredProducts = products;
+
+  if (search) {
+    filteredProducts = products.filter((product) => {
+      return product.name.includes(search);
+    });
+  }
+
+  filteredProducts.forEach((product) => {
     productsHTML += `
       </div> <div class="product-container">
         <div class="product-image-container">
@@ -81,3 +92,9 @@ function renderProductsGrid() {
     });
   });
 }
+
+document.querySelector('.js-search-button').addEventListener('click', () => {
+  const searchValue = document.querySelector('.js-search-bar').value;
+
+  window.location.href = `amazon.html?search=${searchValue}`;
+})
